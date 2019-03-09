@@ -1,0 +1,33 @@
+#2019/3/5 Tuesday  Lesson02
+#给定一个数组a:[3,2,6,8],一个整数x=8，若数组中存在两个数，其和为x，输出这两个数的下标。
+#假设a的长度为L
+#Solution 1:
+def f(a,x):
+    L=len(a)      #空间换时间
+    for i in range(L):           #i=0  j:L-1; i=1 j:L-2 频度：（L-1）*L/2
+        for j in range(i+1,L):
+            print([i,j])
+            if a[i]+a[j]==x: 
+                #比较操作，一次加法，一次减法
+                return [i,j]
+    return None
+
+#Solution 2:
+#This solution is trying to use hash construction (dict).
+def f2(a,x):
+    #prepare something
+    L=len(a)
+    d={}
+    #produce dict
+    for i in range(L):
+        d[a[i]]=i
+    #for any element in list
+    for i in range(L):
+        n=x-a[i]                         #a=[4,4,3,2],x=8
+        if n in d:                       
+            return[i,d[n]]
+        else:
+            d[a[i]]=i
+            
+            
+            
