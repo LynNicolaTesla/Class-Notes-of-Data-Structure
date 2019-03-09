@@ -1,0 +1,54 @@
+##Recursive Method. For this part, the teacher mentioned Recursive Method. And you can also see this special method in my recently
+following user of the github.
+user of github
+github.
+def func(n):               
+    if n==1:
+        return 1
+    else:
+        return n*func(n-1)
+
+#Teacher's code
+pathSet={1:'AB',2:'BC',3:'AC',4:'BA'}         #线性
+conflictSet=[{1,4},{2,3}]          #group是一个list
+def isConflict(group,ConflictSet):
+    for eachsubset in group:
+        tempList=list(eachsubset)
+        for i in range(0,len(tempList)):
+            for j in range(i+1,len(tempList)):
+                if {i,j} in conflictSet:
+                    return True
+    return False
+def cleanToFeasibleSet(G,conflictSet):
+    tempG=[]
+    for eachgroup in G:
+        if not isConflict(eachgroup,conflictSet):
+            tempG.append(eachgroup)
+    return tempG
+
+def f(n):
+    if n==1:
+        return [[{1}]]
+    else:
+        g=f(n-1)
+        G=[]
+        for eachgroup in g:
+            #produce new one
+            newone=set([n])
+            #copy eachgroup first, and add new one into each subset
+            for i in range(0,len(eachgroup)):
+                t=eachgroup.copy()
+                t[i]=t[i].union()                    #union:并集
+                G.append(t)
+            #add newone as a single subset into eachgroup
+            eachgroup.append(newone)
+            G.append(eachgroup)
+        return G
+#For this part, you are ough to run it. And the value given in H has nothing special, it's just a example. Even codes above cannot 
+correspond to the information given in the my textbook, Data Structure and arithmetic.
+H=f(5)
+print(len(H))
+print(H)
+newH=cleanToFeasibleSet(H,conflictSet)
+print(len(newH))
+print(newH)
