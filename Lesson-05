@@ -1,0 +1,53 @@
+Lesson-05-Notes
+class LinkNode:                        #元素域
+    def __init__(self,data):
+        self.data=data
+        self.next=None   #特斯拉想问next为什么没有写进括号里
+    def setNumber(self,data):
+        self.data=data
+    def getNumber(self):
+        return self.data;
+class LinkList:                        #链接域
+    def __init__(self,capacity,length=0):
+        self.capacity=capacity
+        self.length=length
+        self.firstDataNode=None
+
+        
+    def isEmpty(self):
+        return self.length==0
+    def getLength(self):
+        return self.length
+    def insertAtHead(self,x):
+        if self.length>=self.capacity:
+            print("List is full")
+            raise ValueError
+        #产生一个新数据结点P
+        p=LinkNode(x)
+        #p的下一个指向表头firstDataNode         特斯拉想问这边是干嘛的？
+        p.next=self.firstDataNode
+        #表头firstDataNode指向p
+        self.firstDataNode=p
+        #length++
+        self.length+=1
+    def showme(self):                    #特斯拉想问这边又是在干嘛？
+        print("current data:",end="")
+        p=self.firstDataNode
+        while p!=None:
+            print(p.data,end=' ')
+            p=p.next
+        print()
+myList=LinkList(40)
+print(myList.isEmpty())
+myList.insertAtHead(4)
+myList.insertAtHead(5)
+myList.insertAtHead(7)
+myList.insertAtHead(8) 
+print(myList.getLength())
+myList.showme()  
+
+
+
+
+
+        
